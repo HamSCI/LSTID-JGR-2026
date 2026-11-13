@@ -1,20 +1,22 @@
-# Replace this file's contents with your own project's citation metadata after
-# instantiating the template. Do not list AI tools as authors.
+# Citation metadata for the Zenodo release of this repository.
+# The author list, version, DOI, and release date are set by the paper's authors before the
+# release. Do not list AI tools as authors.
 cff-version: 1.2.0
-message: "If you use this project, please cite it as below."
+message: "If you use this software, please cite it as below, and cite the paper it accompanies."
 authors:
-- family-names: "YOUR_FAMILY_NAME"
-  given-names: "YOUR_GIVEN_NAME"
-  orcid: "https://orcid.org/0000-0000-0000-0000"
-title: "{{PROJECT_NAME}}"
+- family-names: "TO BE SET BY THE AUTHORS"
+  given-names: "TO BE SET BY THE AUTHORS"
+title: "LSTID-JGR-2026: Figure code for the multi-year climatology of Large-Scale Traveling Ionospheric Disturbances observed with HF amateur radio"
 version: 0.1.0
-doi: "[DOI to be assigned]"
-date-released: "{{YYYY-MM-DD}}"
-url: "https://github.com/HamSCI/{{REPO_NAME}}"
+doi: "[DOI to be assigned by Zenodo at release]"
+date-released: "2026-11-13"
+url: "https://github.com/HamSCI/LSTID-JGR-2026"
+repository-code: "https://github.com/HamSCI/LSTID-JGR-2026"
 license: MIT
 keywords:
   - HamSCI
   - amateur radio
-  - space weather
+  - large-scale traveling ionospheric disturbances
+  - LSTID
   - ionosphere
   - citizen science
