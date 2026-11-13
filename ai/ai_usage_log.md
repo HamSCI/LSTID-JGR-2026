@@ -52,4 +52,4 @@ command produces this format and appends it in the right order.
 - **Sections/Files Affected**: `CLAUDE.md` (Project Overview), `README.md` (How this fits together)
 - **Nature of Contribution**: Edit
 - **Human Review Status**: Pending review
-- **Git Hash**: [fill in after committing]
+- **Git Hash**: 8b82594, branch `fix-detection-version` (PR HamSCI/LSTID-JGR-2026#2)
