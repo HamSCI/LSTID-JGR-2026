@@ -1,140 +1,101 @@
-# {{PROJECT_NAME}}
+# LSTID-JGR-2026: Figure Code for the LSTID Climatology Paper
 
 ## Project Overview
-{{ONE-PARAGRAPH PROJECT DESCRIPTION: what is being written or built, its purpose, and its
-audience.}}
+This **public** repository holds the code that produces the figures and derived results of the
+manuscript *Multi-Year Climatology of Large-Scale Traveling Ionospheric Disturbances Observed
+with High Frequency Amateur Radio Receiving Networks Using a Novel Automated Detection
+Algorithm* (Sanchez et al.), in preparation for *JGR: Space Physics*. It will be archived on
+Zenodo when the paper is submitted, and the paper's Open Research section will cite that
+archive. Its audience is reviewers and readers who want to reproduce the paper's figures, and
+the authors themselves.
 
-**Lead**: {{LEAD_NAME_CALLSIGN_AND_AFFILIATION}}
-**Collaborators**: {{COLLABORATORS: names, callsigns, and roles}}
-**HamSCI Working Group**: {{WORKING_GROUP, or "none"}}
-**Institution**: {{INSTITUTION, or "none: this is a volunteer project"}}
-**Funder**: {{FUNDER_AND_GRANT_NUMBER, or "unfunded"}}
-**Project period**: {{PROJECT_PERIOD}}
+The LSTID detection algorithm is **not** in this repository. It is the separately released
+[`HamSCI/hamsci_LSTID_detection`](https://github.com/HamSCI/hamsci_LSTID_detection) (v1.0,
+Zenodo DOI in its README), which this repository uses as a pinned dependency. This repository
+starts from that pipeline's output and the external index data, and ends at the paper's figures.
+
+Planning, notes, and coordination live in the private orchestration repository
+`HamSCI/LSTID-PRIVATE`, where this repository is the `code/` submodule. **Nothing private goes
+here**: no unpublished collaborator data, no review correspondence, no draft manuscript text.
+
+**Lead**: Diego F. Sanchez (KD2RLM), The University of Scranton (M.S. Software Engineering 2026)
+**PI and advisor**: Nathaniel A. Frissell (W2NAF), The University of Scranton
+**Collaborators**: the manuscript's co-authors, as listed in the manuscript
+**HamSCI Working Group**: none
+**Institution**: The University of Scranton
+**Funder**: NSF AGS-2045755 (CAREER), primary. NASA support (80NSSC21K1772, 80NSSC23K0848) is
+acknowledged in the detection code; whether it is acknowledged here is the authors' decision.
+**Project period**: through submission and review of the paper (2026 to 2027)
 
 ## Project Goal
-{{PROJECT_GOAL, 1 to 3 sentences.}}
+Anyone can regenerate every figure in the paper from public data and this code, with one
+documented command per figure, and the version cited by the paper is archived on Zenodo.
 
 ## Standing Rules
-
-These two are binding on every HamSCI project and are imported here so they load into context
-automatically:
 
 @.claude/rules/ai-governance.md
 @.claude/rules/hamsci-data.md
 
-Two further rule files are optional, and are scoped by their own `paths:` frontmatter to the
-file types they govern:
+`.claude/rules/python-code.md` applies to `.py`, `pyproject.toml`, and `requirements*.txt`
+through its own `paths:` frontmatter. This repository has no LaTeX; the LaTeX rule file is not
+adopted.
 
-- `.claude/rules/latex-writing.md` applies to `.tex`, `.bib`, `.cls`, and `.sty` files
-- `.claude/rules/python-code.md` applies to `.py`, `pyproject.toml`, and `requirements*.txt`
+## Figures
 
-Delete whichever the project does not use. To have one of them load unconditionally instead, add
-an `@` import line for it above.
+The paper's figures, in order of appearance in the manuscript (`main.tex` at `kd2rlm` commit
+`3015b41`, 2026-11-13). The `\label` is the stable name; numbers shift as the draft changes.
 
-## Repository Structure
+| Label | File in the manuscript repo |
+|---|---|
+| `fig:ham_obs` | `plots/fig_ham_obs.jpg` |
+| `fig:Pre_Processed` | `plots/fig_preprocessed_v3.png` |
+| `fig:Sinfit` | `plots/fig_sinfit.png` |
+| `fig:climatology_time_series` | `results_plots/Daily Sinusoidal Fit Parameters.png` |
+| `fig:correlation_panel_amp_pv` | `results_plots/fig_correlation_panel_amp_pv.png` |
+| `fig:seasonal_phase` | `results_plots/fig_seasonal_phase_amp_pv_ae_symh.png` |
+| `fig:manual_auto_validation_2017` | `results_plots/fig_rmse_thresh.png` |
+| `fig:monthly_lstid_vs_calm` | `results_plots/20150101-20221231_monthly_event_counts_combined.png` |
+| `fig:event_probability_modulation` | `results_plots/20150101-20221231_event_probability_cpdfs_vertical.png` |
+| `fig:correlation_panel_minskip_flux` | `results_plots/fig_correlation_panel_minskip_flux.png` |
+| `fig:correlation_panel_minskip_fof2_es_summer_winter` | `results_plots/fig_correlation_panel_minskip_fof2_es_summer_winter.png` |
 
-This project starts from the HamSCI `ai_project_template` scaffold. Add or remove top-level
-directories to match the project. The scaffold provides:
-
-```
-{{REPO_NAME}}/
-├── CLAUDE.md                     ← this file; project instructions for Claude
-├── README.md
-├── LICENSE
-├── CITATION.cff                  ← make the project citable
-├── .gitignore
-├── .gitmodules                   ← present only if you add submodules
-├── .claude/
-│   ├── settings.json
-│   ├── commands/commit.md        ← /commit workflow
-│   └── rules/
-│       ├── ai-governance.md      ← required
-│       ├── hamsci-data.md        ← required
-│       ├── latex-writing.md      ← delete if no LaTeX
-│       └── python-code.md        ← delete if no Python
-├── .github/ISSUE_TEMPLATE/
-├── ai/
-│   └── ai_usage_log.md           ← mandatory AI session log
-├── docs/
-│   └── GETTING_STARTED.md        ← delete once the project is running
-└── {{PROJECT-SPECIFIC FOLDERS}}  ← e.g. manuscript/, src/, notes/, posters/, data/
-```
+Keep this table in step with the manuscript. Each row should eventually name the script that
+makes the figure and the inputs it reads.
 
 ## Working Conventions
 
-**Session notes.** Keep one dated notes file per working session in `notes/`, named
-`YYYY-MM-DD_<topic>.md`, recording what was decided, why, what it depends on, and what is still
-open. Write them for a reader with no context, which in practice means a future Claude session
-and a future you.
+**Reproducibility is the deliverable.** Every figure is made by a committed script from inputs
+that are either public (fetched by a committed script) or produced by a committed step. No
+figure depends on a notebook state, a local path, or a hand edit. Pin dependency versions,
+including `hamsci_LSTID_detection` at its released tag.
 
-**Commit the curated, human-readable record.** Memos, notes, reports and other curated write-ups of the analysis are
-committed as PDFs next to their source (LaTeX or Markdown), rebuilt in the same commit so the two
-never disagree. They show what was concluded without anyone having to rebuild anything, and the
-commit history becomes a readable record of what was done. Figures a memo or paper includes are
-committed with that document. The rule is about curated documents, not bulk output: batches of
-generated figures, per-event plot sets, galleries and image compilations stay out of git and are
-regenerated by committed scripts. Also out: LaTeX intermediates (`.aux`, `.log`, `.bbl` and the
-like), caches, scratch output, and raw data. A curated PDF over 50 MB needs a decision first.
+**Data stays out of git.** Madrigal HDF5 files, pipeline caches, and index downloads are
+fetched or regenerated. Small derived tables the figures read directly may be committed if the
+authors decide so, with their provenance stated. Generated figures are not committed here; the
+paper's copies live in the manuscript repository.
 
-**Commits.** Use the `/commit` command. It logs the AI session, then commits each changed repo
-(submodules first) on a feature branch and opens a pull request. Prefix AI-assisted commits with
-`[AI-assisted]`. Reference tracking issues (`refs #N`, or `closes #N` only when completion is
-yours to declare).
+**Cite data and software.** HamSCI amateur radio spots via CEDAR Madrigal, OMNI (AE, SYM-H,
+F10.7), MERRA-2 behind the Polar Vortex Index, GIRO ionosonde data, and the detection software,
+each with access dates. See `.claude/rules/hamsci-data.md`.
 
-**Every change goes through a pull request.** Branch from `origin/main`, commit on the branch,
-push the branch, and open a PR with `gh pr create`. A human maintainer reviews and merges.
-Claude never commits or pushes directly to `main` and never merges.
+**Commits.** Use `/commit`. Prefix AI-assisted commits with `[AI-assisted]`. Every change goes
+on a feature branch and through a pull request; a human maintainer reviews and merges. Claude
+never commits or pushes to `main` and never merges. Pushing a feature branch and opening its PR
+is standing permission once the user approves the commit; any other push needs explicit
+instruction. Never force-push or hard-reset.
 
-**Pushing a feature branch and opening its PR is standing permission** once the user has approved
-the commit. Any other push needs explicit instruction. Never force-push or hard-reset. Fetch and
-verify remote state before any push.
-
-**Project boards and issue status are human-curated.** Read them freely; propose changes and
-name the exact command rather than running it.
-
-## Submodules (optional)
-
-If the project includes submodules (an Overleaf manuscript, a separate code repository, a
-hardware design repo), the commit and push order is fixed:
-
-1. Commit **inside** the submodule, on its own feature branch
-2. Push the submodule branch and open its PR
-3. After that PR merges, commit the updated submodule pointer in this repo, on this repo's branch
-4. Push this repo's branch and open or update its PR
-
-Never point this repo at an unmerged submodule branch commit.
-
-Never the reverse at either stage. A parent pushed ahead of its submodule looks correct on the
-machine that did it and breaks for every clone, because the recorded pointer names a commit no
-remote has. Verify before pushing a parent:
-
-```bash
-git -C <submodule> branch -r --contains HEAD   # empty output = local only; push the submodule first
-```
-
-Add submodules with:
-
-```bash
-git submodule add https://git.overleaf.com/<id> overleaf      # Overleaf manuscript
-git submodule add git@github.com:HamSCI/<repo>.git <path>     # HamSCI code repo
-```
-
-The `/commit` workflow auto-detects submodules via `git submodule status`.
+**Releases are human decisions.** The Zenodo archive is made by a GitHub release with the
+Zenodo integration enabled. The tag, the `CITATION.cff` author list, and the license are set by
+the authors; Claude can prepare them but does not tag or release.
 
 ## Template Updates
 
-This repository follows an `ai_project_template`; `.claude/template.json` records which one and
-which of its commits was last adopted. A session-start hook (`.claude/hooks/template_check.sh`,
-registered in `.claude/settings.json`) checks that template at most once a day and, if it has
-moved on, says so at the start of the session. When it does, tell the user and offer
-`/template-sync`, which applies the template's changes **as changes**, on a branch and through a
-PR, without overwriting project-specific content. The check is read-only and silent when offline.
-
-A workflow improvement made here that other projects would want belongs upstream too: propose it
-to the template in the same session.
+This repository follows `HamSCI/ai_project_template`; `.claude/template.json` records the
+template commit last adopted. A session-start hook checks for template changes once a day; when
+it reports one, offer `/template-sync`.
 
 ## AI Governance
 
 Every substantive AI session is logged in `ai/ai_usage_log.md` **before** the work is committed.
-Use `/commit`, which enforces the ordering. The full policy stack is in
-`.claude/rules/ai-governance.md`, which is imported above.
+Use `/commit`, which enforces the ordering. Because this repository is public, its log is public
+too, which is intended: it backs the AI-use disclosure in the paper and the Zenodo release.
