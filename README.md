@@ -11,7 +11,8 @@ version cited by the paper will be archived on Zenodo.
 ## How this fits together
 
 - **LSTID detection**: [`HamSCI/hamsci_LSTID_detection`](https://github.com/HamSCI/hamsci_LSTID_detection),
-  released separately (v1.0, archived on Zenodo; see its README for the DOI). It turns daily
+  released separately (release `V0.2.0_Sanchez_et_al_2026_MS`, Zenodo DOI
+  [10.5281/zenodo.20186618](https://doi.org/10.5281/zenodo.20186618)). It turns daily
   HamSCI amateur radio spot files from the [CEDAR Madrigal database](http://cedar.openmadrigal.org)
   into per-day LSTID detections and sinusoidal fit parameters.
 - **This repository**: starts from that output plus external geophysical index data and produces
