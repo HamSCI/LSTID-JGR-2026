@@ -42,3 +42,14 @@ command produces this format and appends it in the right order.
 - **Nature of Contribution**: Scaffolding, draft
 - **Human Review Status**: Pending review
 - **Git Hash**: d8155fb, branch `project-setup` (PR HamSCI/LSTID-JGR-2026#1)
+
+## [2026-11-13 15:32 UTC]
+- **Tool**: Claude (Anthropic), claude-opus-5-5
+- **Session Purpose**: Correct the cited release of `hamsci_LSTID_detection`: the setup docs
+  said "v1.0" (taken from a commit message), but the release is
+  `V0.2.0_Sanchez_et_al_2026_MS` (Zenodo DOI 10.5281/zenodo.20186618), as the manuscript bib
+  cites it. Verified with `gh release list`.
+- **Sections/Files Affected**: `CLAUDE.md` (Project Overview), `README.md` (How this fits together)
+- **Nature of Contribution**: Edit
+- **Human Review Status**: Pending review
+- **Git Hash**: 8b82594, branch `fix-detection-version` (PR HamSCI/LSTID-JGR-2026#2)

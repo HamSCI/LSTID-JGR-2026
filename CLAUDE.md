@@ -10,8 +10,9 @@ archive. Its audience is reviewers and readers who want to reproduce the paper's
 the authors themselves.
 
 The LSTID detection algorithm is **not** in this repository. It is the separately released
-[`HamSCI/hamsci_LSTID_detection`](https://github.com/HamSCI/hamsci_LSTID_detection) (v1.0,
-Zenodo DOI in its README), which this repository uses as a pinned dependency. This repository
+[`HamSCI/hamsci_LSTID_detection`](https://github.com/HamSCI/hamsci_LSTID_detection) (release
+`V0.2.0_Sanchez_et_al_2026_MS`, Zenodo DOI 10.5281/zenodo.20186618), which this repository uses
+as a pinned dependency. This repository
 starts from that pipeline's output and the external index data, and ends at the paper's figures.
 
 Planning, notes, and coordination live in the private orchestration repository
