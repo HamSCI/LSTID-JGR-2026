@@ -41,4 +41,4 @@ command produces this format and appends it in the right order.
   (removed; no LaTeX here)
 - **Nature of Contribution**: Scaffolding, draft
 - **Human Review Status**: Pending review
-- **Git Hash**: [fill in after committing]
+- **Git Hash**: d8155fb, branch `project-setup` (PR HamSCI/LSTID-JGR-2026#1)
