@@ -1,0 +1,6 @@
+# generated figure outputs (regenerate with run_all.sh)
+fig*/*.png
+fig*/*.pdf
+fig*/*.csv
+__pycache__/
+.ipynb_checkpoints/

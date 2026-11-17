@@ -53,3 +53,20 @@ command produces this format and appends it in the right order.
 - **Nature of Contribution**: Edit
 - **Human Review Status**: Pending review
 - **Git Hash**: 8b82594, branch `fix-detection-version` (PR HamSCI/LSTID-JGR-2026#2)
+
+## [2026-11-17 05:50 UTC]
+- **Tool**: Claude (Anthropic), claude-opus-5-5
+- **Session Purpose**: Add the figure code for Figs 4–11 (moved from Diego's notebook) to the
+  public repo so the figures can be regenerated: one script per figure plus `run_all.sh`, input
+  location set by the `LSTID_DATA_DIR` environment variable (data kept out of git), a GIRO
+  ionosonde download script, and docs (README, data/README, DATA_LICENSES, per-figure READMEs
+  for Figs 1–3, which are made by harc_plot and hamsci_LSTID_detection).
+- **Sections/Files Affected**: `2026_JGR_HamSCI_LSTID_Sanchez_figures/` (new): fig4–fig11
+  scripts (Fig 4 output renamed to the manuscript's file name), `run_all.sh`,
+  `requirements.txt` (adds scikit-learn for Fig 7), `.gitignore`, `README.md`,
+  `DATA_LICENSES.md`, `data/README.md`, `data/gen_sza.py`, `data/download_giro.py`,
+  `fig1/`–`fig3/README.md`
+- **Nature of Contribution**: Code generation, edit (refactor of author's notebook code), documentation
+- **Human Review Status**: Partially reviewed (all 8 scripts ran; Fig 10 r = −0.479 and −0.945
+  match the paper; `download_giro.py` not yet tested against the GIRO server)
+- **Git Hash**: [after commit]
