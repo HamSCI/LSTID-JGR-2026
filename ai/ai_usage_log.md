@@ -69,4 +69,4 @@ command produces this format and appends it in the right order.
 - **Nature of Contribution**: Code generation, edit (refactor of author's notebook code), documentation
 - **Human Review Status**: Partially reviewed (all 8 scripts ran; Fig 10 r = −0.479 and −0.945
   match the paper; `download_giro.py` not yet tested against the GIRO server)
-- **Git Hash**: [after commit]
+- **Git Hash**: 53be862, branch `add-figure-code` (PR HamSCI/LSTID-JGR-2026#3)
