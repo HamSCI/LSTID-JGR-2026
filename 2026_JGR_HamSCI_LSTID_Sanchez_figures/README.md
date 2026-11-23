@@ -24,13 +24,17 @@ Each paper figure has its own folder. Run a script and the figure is written nex
 
 Every script starts with a docstring describing the figure, its inputs, processing, and output.
 
+Numbers quoted in the text that no figure script prints (season-removed correlations, the
+scrambled-year and sporadic-E tests, the 2017 day-level scores, quality-control counts) are
+reproduced by the scripts in `analysis/`; see `analysis/README.md`.
+
 ## Running
 
 ```bash
 pip install -r requirements.txt
 export LSTID_DATA_DIR=/path/to/data    # folder holding the input data (see Data below)
 python fig4/fig4_fit_parameters.py     # one figure
-./run_all.sh                           # all figures
+./run_all.sh                           # all figures, then the analysis scripts
 ```
 
 Scripts read their inputs from the folder named by the `LSTID_DATA_DIR` environment variable. If it
