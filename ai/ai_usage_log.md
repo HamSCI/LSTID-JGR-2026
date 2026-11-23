@@ -82,4 +82,4 @@ command produces this format and appends it in the right order.
 - **Nature of Contribution**: Code generation, analysis, documentation
 - **Human Review Status**: Partially reviewed (all five scripts run on the real data; numbers
   checked against the text; code not reviewed line by line)
-- **Git Hash**: [fill in after committing]
+- **Git Hash**: bec3f7e, 8a40e38, branch `add-analysis-scripts` (PR HamSCI/LSTID-JGR-2026#5)
