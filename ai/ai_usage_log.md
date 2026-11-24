@@ -96,4 +96,4 @@ command produces this format and appends it in the right order.
   without the limits; outputs compared line by line)
 - **Human Review Status**: Partially reviewed (removal requested by Diego after reviewing the
   before/after comparison; code diff not yet reviewed)
-- **Git Hash**: [fill in after committing]
+- **Git Hash**: a606539, branch `add-analysis-scripts` (PR HamSCI/LSTID-JGR-2026#5)
