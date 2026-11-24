@@ -63,8 +63,6 @@ PERIOD_MIN = 1.0   # paper Sec 3.5: fitted period must lie in 1-4.5 hr
 PERIOD_MAX = 4.5
 AMPLITUDE_COL = "amplitude_km"
 TID_THRESHOLD = 33.0
-MIN_AMPLITUDE = 0.0
-MAX_AMPLITUDE = 90.0
 PROB_BINS = 25
 SHOW_FIGURE = True
 
@@ -87,9 +85,6 @@ df_base = df_base.loc[pd.to_numeric(df_base["T_hr"]).between(PERIOD_MIN, PERIOD_
 print(f"Period filter ({PERIOD_MIN:g}-{PERIOD_MAX:g} hr): kept {len(df_base)} days")
 df_base[AMPLITUDE_COL] = pd.to_numeric(df_base[AMPLITUDE_COL], errors="coerce")
 df_base = df_base.dropna(subset=[AMPLITUDE_COL]).copy()
-df_base = df_base.loc[
-    (df_base[AMPLITUDE_COL] > MIN_AMPLITUDE) & (df_base[AMPLITUDE_COL] < MAX_AMPLITUDE)
-].copy()
 df_base["event_class"] = pd.Series(index=df_base.index, dtype="object")
 df_base.loc[df_base[AMPLITUDE_COL] < TID_THRESHOLD, "event_class"] = "Quiet"
 df_base.loc[df_base[AMPLITUDE_COL] >= TID_THRESHOLD, "event_class"] = "LSTID"

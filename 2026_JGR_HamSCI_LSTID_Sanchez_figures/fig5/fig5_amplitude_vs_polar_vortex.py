@@ -74,12 +74,6 @@ R2_MIN = 0.35
 PERIOD_MIN = 1.0   # paper Sec 3.5: fitted period must lie in 1-4.5 hr
 PERIOD_MAX = 4.5
 
-MIN_AMPLITUDE = 0.0
-MAX_AMPLITUDE = 90.0
-
-MIN_SKIP_MIN = 0.0
-MIN_SKIP_MAX = 1600.0
-
 PV_MIN = -3.0
 PV_MAX = 3.0
 
@@ -151,16 +145,6 @@ df_base = df_base.loc[(df_base.index >= date_min) & (df_base.index <= date_max)]
 df_base = df_base.loc[df_base[R2_COL] >= R2_MIN].copy()
 df_base["T_hr"] = pd.to_numeric(df_base["T_hr"])
 df_base = df_base.loc[df_base["T_hr"].between(PERIOD_MIN, PERIOD_MAX, inclusive="both")].copy()
-
-df_base = df_base.loc[
-    (df_base["amplitude_km"] > MIN_AMPLITUDE) &
-    (df_base["amplitude_km"] < MAX_AMPLITUDE)
-].copy()
-
-df_base = df_base.loc[
-    (df_base["min_combined_fit"] > MIN_SKIP_MIN) &
-    (df_base["min_combined_fit"] <= MIN_SKIP_MAX)
-].copy()
 
 # ======================================================================================
 # LOAD PV (DAILY)

@@ -75,8 +75,6 @@ R2_COL = "r2"
 R2_MIN = 0.35
 PERIOD_MIN = 1.0   # paper Sec 3.5: fitted period must lie in 1-4.5 hr
 PERIOD_MAX = 4.5
-MIN_AMPLITUDE = 0.0
-MAX_AMPLITUDE = 90.0
 
 PV_MIN = -3.0
 PV_MAX = 3.0
@@ -97,7 +95,6 @@ for col in ["amplitude_km", "T_hr", R2_COL]:
 df = df.loc[START_DATE:END_DATE]
 df = df.loc[df[R2_COL] >= R2_MIN]
 df = df.loc[df["T_hr"].between(PERIOD_MIN, PERIOD_MAX, inclusive="both")]
-df = df.loc[(df["amplitude_km"] > MIN_AMPLITUDE) & (df["amplitude_km"] < MAX_AMPLITUDE)]
 amp = df["amplitude_km"]
 
 pv = pd.read_csv(PV_CSV, header=None, names=["date", "pv"])

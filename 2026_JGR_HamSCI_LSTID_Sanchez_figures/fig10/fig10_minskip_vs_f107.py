@@ -80,14 +80,7 @@ R2_MIN = 0.35
 PERIOD_MIN = 1.0   # paper Sec 3.5: fitted period must lie in 1-4.5 hr
 PERIOD_MAX = 4.5
 
-MIN_AMPLITUDE = 0.0
-MAX_AMPLITUDE = 90.0
-
-MIN_SKIP_MIN = 0.0
-MIN_SKIP_MAX = 1600.0
-
-F107_MIN = 0.0
-F107_MAX = 200.0
+F107_FILL = 999.9   # OMNI fill value for missing F10.7
 
 LOWPASS_WINDOW_FLUX = 365   # V11: 365 d nulls the annual cycle (180 d passed ~65% of it)
 BLOCK_LENGTH_FLUX   = 365   # matched to LOWPASS_WINDOW_FLUX, as the paper states (was 30)
@@ -158,16 +151,6 @@ df_base = df_base.loc[df_base[R2_COL] >= R2_MIN].copy()
 df_base["T_hr"] = pd.to_numeric(df_base["T_hr"])
 df_base = df_base.loc[df_base["T_hr"].between(PERIOD_MIN, PERIOD_MAX, inclusive="both")].copy()
 
-df_base = df_base.loc[
-    (df_base["amplitude_km"] > MIN_AMPLITUDE) &
-    (df_base["amplitude_km"] < MAX_AMPLITUDE)
-].copy()
-
-df_base = df_base.loc[
-    (df_base["min_combined_fit"] > MIN_SKIP_MIN) &
-    (df_base["min_combined_fit"] <= MIN_SKIP_MAX)
-].copy()
-
 # ======================================================================================
 # LOAD F10.7 (DAILY)
 # ======================================================================================
@@ -187,8 +170,7 @@ df_f107 = df_f107.set_index("date").sort_index()
 
 df_f107["f10.7_index"] = pd.to_numeric(df_f107["f10.7_index"])
 df_f107.loc[
-    (df_f107["f10.7_index"] <= F107_MIN) |
-    (df_f107["f10.7_index"] > F107_MAX),
+    df_f107["f10.7_index"] >= F107_FILL,
     "f10.7_index"
 ] = np.nan
 

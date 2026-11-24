@@ -90,8 +90,6 @@ R2_COL = "r2"
 R2_MIN = 0.35
 
 AMPLITUDE_COL = "amplitude_km"
-MIN_AMPLITUDE = 0.0
-MAX_AMPLITUDE = 90.0
 
 PERIOD_COL = "T_hr"
 PERIOD_MIN = 1.0
@@ -181,7 +179,6 @@ dfa[PERIOD_COL] = pd.to_numeric(dfa[PERIOD_COL], errors="raise")
 # QC
 dfa = dfa.loc[dfa[R2_COL] >= R2_MIN].copy()
 dfa = dfa.loc[dfa[AMPLITUDE_COL].notna()].copy()
-dfa = dfa.loc[(dfa[AMPLITUDE_COL] > MIN_AMPLITUDE) & (dfa[AMPLITUDE_COL] < MAX_AMPLITUDE)].copy()
 dfa = dfa.loc[dfa[PERIOD_COL].between(PERIOD_MIN, PERIOD_MAX, inclusive="both")].copy()
 
 dfa["month"] = dfa["date"].dt.month
