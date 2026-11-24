@@ -33,7 +33,7 @@ import pandas as pd
 from scipy.stats import pearsonr
 import common as c
 
-fits = c.load_fits(skip_range=True)            # as Figure 5
+fits = c.load_fits()
 frame = c.fit_day_frame(fits, pv=c.load_pv(), cos_sza=c.load_cos_sza())
 grid = frame.index
 amp, pv, cos_sza = frame["amplitude_km"], frame["pv"], frame["cos_sza"]

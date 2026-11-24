@@ -63,7 +63,6 @@ R2_MIN = 0.35
 PERIOD_MIN = 1.0   # paper Sec 3.5: fitted period must lie in 1-4.5 hr
 PERIOD_MAX = 4.5
 
-AMPLITUDE_MAX = 90.0
 ROLLING_DAYS = 7
 T_HR_CMAP = "rainbow"
 
@@ -90,8 +89,7 @@ df = df.loc[(df.index.year >= START_YEAR) & (df.index.year <= END_YEAR)].copy()
 df = df.loc[df[R2_COL] >= R2_MIN].copy()
 df = df.loc[df["T_hr"].between(PERIOD_MIN, PERIOD_MAX, inclusive="both")].copy()
 
-df["selected"] = df["amplitude_km"] < AMPLITUDE_MAX
-df_sel = df.loc[df["selected"]].copy()
+df_sel = df.copy()
 
 # Extract start and end dates for file naming (post-filter)
 sDate = df_sel.index.min()

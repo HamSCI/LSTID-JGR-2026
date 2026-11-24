@@ -22,21 +22,16 @@ raw = c.load_fits_raw()
 has_fit = raw["r2"].notna()
 r2_ok = raw["r2"].ge(c.R2_MIN)
 per_ok = raw["T_hr"].between(c.PERIOD_MIN, c.PERIOD_MAX, inclusive="both")
-amp_ok = (raw["amplitude_km"] > c.MIN_AMPLITUDE) & (raw["amplitude_km"] < c.MAX_AMPLITUDE)
 print("1. Quality control, 2015-01-01 to 2022-12-31")
 print(f"   calendar days {len(c.calendar())}; days with a fit {has_fit.sum()}")
 print(f"   R^2 >= {c.R2_MIN}: {r2_ok.sum()}")
-print(f"   ... and 0 < amplitude < 90 km: {(r2_ok & amp_ok).sum()}")
-print(f"   ... and period {c.PERIOD_MIN:g}-{c.PERIOD_MAX:g} hr: {(r2_ok & amp_ok & per_ok).sum()} "
-      f"(period limit removes {(r2_ok & amp_ok & ~per_ok).sum()})")
-print(f"   R^2 only -> R^2 and period: {r2_ok.sum()} -> {(r2_ok & per_ok).sum()} "
-      f"(removes {(r2_ok & ~per_ok).sum()})")
+print(f"   ... and period {c.PERIOD_MIN:g}-{c.PERIOD_MAX:g} hr: {(r2_ok & per_ok).sum()} "
+      f"(period limit removes {(r2_ok & ~per_ok).sum()})")
 fits = c.load_fits()
 print(f"   LSTID-active (>= {c.TID_THRESHOLD:g} km) {fits['lstid'].sum()}, non-LSTID {(~fits['lstid']).sum()}")
 
 # ---------------------------------------------------------------- 2. skip vs F10.7
-fits_s = c.load_fits(skip_range=True)       # as Figure 10
-frame = c.fit_day_frame(fits_s, f107=c.load_f107())
+frame = c.fit_day_frame(fits, f107=c.load_f107())
 ms, fx = frame["min_combined_fit"], frame["f107"]
 pair_days = ms.notna() & fx.notna()
 print("\n2. Minimum skip distance vs F10.7 (95% block-bootstrap CI, block = window)")

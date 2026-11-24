@@ -83,3 +83,17 @@ command produces this format and appends it in the right order.
 - **Human Review Status**: Partially reviewed (all five scripts run on the real data; numbers
   checked against the text; code not reviewed line by line)
 - **Git Hash**: bec3f7e, 8a40e38, branch `add-analysis-scripts` (PR HamSCI/LSTID-JGR-2026#5)
+
+## [2026-11-24 16:06 UTC]
+- **Tool**: Claude (Anthropic), claude-opus-5-5
+- **Session Purpose**: Remove three data limits that the figure scripts applied but the paper
+  does not describe (amplitude 0-90 km, minimum skip distance 0-1600 km, F10.7 <= 200), so
+  every figure uses only the quality control in paper Section 3.5 (R^2 >= 0.35, period
+  1-4.5 hr). The F10.7 change keeps the removal of OMNI's 999.9 fill value.
+- **Sections/Files Affected**: `fig4`-`fig11` scripts; `analysis/common.py`,
+  `analysis/qc_and_skip_windows.py`, `analysis/vortex_seasonal_tests.py`
+- **Nature of Contribution**: Code edit, analysis (all figure and analysis scripts rerun with and
+  without the limits; outputs compared line by line)
+- **Human Review Status**: Partially reviewed (removal requested by Diego after reviewing the
+  before/after comparison; code diff not yet reviewed)
+- **Git Hash**: [fill in after committing]

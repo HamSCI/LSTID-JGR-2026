@@ -68,7 +68,7 @@ CSV_FILE   = os.path.join(DATA_DIR, "20140101-20230901_merged.csv")
 OUTPUT_DIR = HERE
 START_DATE, END_DATE = "2015-01-01", "2022-12-31"
 
-R2_MIN, MIN_SKIP_MIN, MIN_SKIP_MAX = 0.35, 0.0, 1600.0
+R2_MIN = 0.35
 CS_MIN, H0, H1 = 0, 13, 23
 STATIONS  = ['BC840', 'AU930', 'EG931', 'AL945', 'WP937', 'MHJ45']
 ES_THRESH = 4.0
@@ -89,7 +89,6 @@ df["r2"] = pd.to_numeric(df["r2"])
 df = df.loc[(df.index >= date_min) & (df.index <= date_max)]
 df = df.loc[df["r2"] >= R2_MIN]
 df = df.loc[pd.to_numeric(df["T_hr"]).between(1.0, 4.5, inclusive="both")]   # paper Sec 3.5 period QC
-df = df.loc[(df["min_combined_fit"] > MIN_SKIP_MIN) & (df["min_combined_fit"] <= MIN_SKIP_MAX)]
 ms_daily = df["min_combined_fit"].resample("D").mean()
 
 # ============ GIRO daily foEs occurrence + foF2 ============

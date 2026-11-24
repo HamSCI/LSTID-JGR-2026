@@ -59,8 +59,6 @@ PERIOD_MAX = 4.5
 
 AMPLITUDE_COL = "amplitude_km"
 TID_THRESHOLD = 33.0
-MIN_AMPLITUDE = 0.0
-MAX_AMPLITUDE = 90.0
 
 SHOW_FIGURE = True
 os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -84,9 +82,6 @@ df = df.loc[pd.to_numeric(df["T_hr"]).between(PERIOD_MIN, PERIOD_MAX, inclusive=
 
 df[AMPLITUDE_COL] = pd.to_numeric(df[AMPLITUDE_COL], errors="raise")
 df = df.loc[df[AMPLITUDE_COL].notna()].copy()
-df = df.loc[
-    (df[AMPLITUDE_COL] > MIN_AMPLITUDE) & (df[AMPLITUDE_COL] < MAX_AMPLITUDE)
-].copy()
 
 df["event_class"] = pd.Series(index=df.index, dtype="object")
 df.loc[df[AMPLITUDE_COL] < TID_THRESHOLD, "event_class"] = "Calm"

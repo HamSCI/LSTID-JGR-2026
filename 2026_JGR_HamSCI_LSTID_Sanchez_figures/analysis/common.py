@@ -21,8 +21,6 @@ DATA_DIR = os.environ.get("LSTID_DATA_DIR", os.path.join(HERE, "..", "data"))
 START_DATE, END_DATE = "2015-01-01", "2022-12-31"
 R2_MIN = 0.35                 # paper Section 3.5
 PERIOD_MIN, PERIOD_MAX = 1.0, 4.5
-MIN_AMPLITUDE, MAX_AMPLITUDE = 0.0, 90.0
-MIN_SKIP_MIN, MIN_SKIP_MAX = 0.0, 1600.0
 TID_THRESHOLD = 33.0          # LSTID-active day: amplitude >= 33 km (Figure 7)
 CLIM_HALF_WINDOW = 15         # +-days for the day-of-year climatology (as in Figure 10e)
 
@@ -56,16 +54,12 @@ def load_fits_raw():
     return df
 
 
-def load_fits(skip_range=False):
-    """Quality-controlled daily fits, as in Figures 8 and 9: R^2 >= 0.35, period 1-4.5 hr,
-    0 < amplitude < 90 km. With skip_range=True, also 0 < minimum skip distance <= 1600 km, as in
-    Figures 5, 10 and 11. Adds `lstid` (amplitude >= 33 km)."""
+def load_fits():
+    """Quality-controlled daily fits, as in every figure (paper Section 3.5): R^2 >= 0.35 and
+    period 1-4.5 hr. Adds `lstid` (amplitude >= 33 km)."""
     df = load_fits_raw()
-    if skip_range:
-        df = df.loc[(df["min_combined_fit"] > MIN_SKIP_MIN) & (df["min_combined_fit"] <= MIN_SKIP_MAX)]
     df = df.loc[df["r2"].ge(R2_MIN)]
-    df = df.loc[df["T_hr"].between(PERIOD_MIN, PERIOD_MAX, inclusive="both")]
-    df = df.loc[(df["amplitude_km"] > MIN_AMPLITUDE) & (df["amplitude_km"] < MAX_AMPLITUDE)].copy()
+    df = df.loc[df["T_hr"].between(PERIOD_MIN, PERIOD_MAX, inclusive="both")].copy()
     df["lstid"] = df["amplitude_km"] >= TID_THRESHOLD
     return df
 
@@ -88,12 +82,12 @@ def load_ae_symh_5min():
 
 
 def load_f107():
-    """Daily F10.7 from the OMNI file, as read by Figure 10 (values outside 0-200 set missing)."""
+    """Daily F10.7 from the OMNI file, as read by Figure 10 (the 999.9 fill value set missing)."""
     d = pd.read_csv(os.path.join(DATA_DIR, "omni2_daily_3hWFoJxMID.lst"), sep=r"\s+", header=None,
                     names=["year", "day", "hour", "proton_density", "f107"])
     d.index = pd.to_datetime(d["year"].astype(str) + d["day"].astype(str), format="%Y%j")
     f = pd.to_numeric(d["f107"])
-    return f.where((f > 0) & (f <= 200))
+    return f.where(f < 999.9)
 
 
 def load_cos_sza():
